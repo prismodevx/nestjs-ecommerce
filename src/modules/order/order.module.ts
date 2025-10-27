@@ -1,20 +1,11 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from '@shared/database/prisma/prisma.module';
-import { CreateOrderUseCase } from '@modules/order/application/create-order.use-case';
-import { PrismaOrderRepository } from '@modules/order/infrastructure/prisma-order.repository';
-import { ProductModule } from '@modules/product/product.module';
-import { OrderController } from '@modules/order/infrastructure/order.controller';
+import { CreateOrderUseCase } from '@modules/order/application/command/create-order/create-order.use-case';
+import { OrderController } from '@modules/order/presentation/order.controller';
+import { DatabaseModule } from '@shared/database/database.module';
 
 @Module({
-  imports: [PrismaModule, ProductModule],
+  imports: [DatabaseModule],
   controllers: [OrderController],
-  providers: [
-    CreateOrderUseCase,
-
-    {
-      provide: 'OrderRepository',
-      useClass: PrismaOrderRepository,
-    },
-  ],
+  providers: [CreateOrderUseCase],
 })
 export class OrderModule {}

@@ -1,5 +1,6 @@
 import { Order } from './order.entity';
+import { IBaseRepository } from '@shared/database/domain/base.repository.interface';
 
-export interface OrderRepository {
-  save(order: Order, tx: any): Promise<void>;
+export interface OrderRepository extends IBaseRepository {
+  save(order: Order): Promise<void>;
 }

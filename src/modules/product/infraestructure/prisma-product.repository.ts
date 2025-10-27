@@ -2,13 +2,29 @@ import { Injectable } from '@nestjs/common';
 import { ProductRepository } from '@/modules/product/domain/product.repository';
 import { PrismaService } from '@shared/database/prisma/prisma.service';
 import { Product } from '@/modules/product/domain/product.entity';
+import { TransactionalRepository } from '@shared/database/prisma/unit-of-work.service';
+import { BaseRepository } from '@shared/database/prisma/base.repository';
+import { Prisma } from '@/generated/client/client';
 
 @Injectable()
-export class PrismaProductRepository implements ProductRepository {
-  constructor(private prisma: PrismaService) {}
+@TransactionalRepository()
+export class PrismaProductRepository
+  extends BaseRepository
+  implements ProductRepository
+{
+  constructor(defaultPrisma: PrismaService) {
+    super(defaultPrisma);
+  }
 
-  async findByIdForUpdate(id: string, tx: any): Promise<Product | null> {
-    const rows = await tx.$queryRaw`
+  async findByIdForUpdate(id: string): Promise<Product | null> {
+    const rows = await this.prisma.$queryRaw<
+      {
+        id: string;
+        name: string;
+        price: number;
+        stock: number;
+      }[]
+    >`
       SELECT * FROM "Product"
       WHERE id = ${id}
         FOR UPDATE
@@ -20,10 +36,39 @@ export class PrismaProductRepository implements ProductRepository {
     return new Product(row.id, row.name, Number(row.price), Number(row.stock));
   }
 
-  async save(product: Product, tx: any): Promise<void> {
-    await tx.product.update({
+  async findManyByIdForUpdate(ids: string[]): Promise<Product[]> {
+    const products = await this.prisma.$queryRaw<
+      {
+        id: string;
+        name: string;
+        price: number;
+        stock: number;
+      }[]
+    >(Prisma.sql`
+      SELECT *
+      FROM "Product"
+      WHERE id = ANY(${ids})
+      FOR UPDATE
+    `);
+
+    return products.map((p) => new Product(p.id, p.name, p.price, p.stock));
+  }
+
+  async save(product: Product): Promise<void> {
+    await this.prisma.product.update({
       where: { id: product.id },
       data: { stock: product.getStock() },
     });
+  }
+
+  async saveMany(products: Product[]): Promise<void> {
+    for (const p of products) {
+      await this.prisma.product.update({
+        where: { id: p.id },
+        data: {
+          stock: p.getStock(),
+        },
+      });
+    }
   }
 }
