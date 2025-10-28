@@ -8,12 +8,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Customer {
-  id     String  @id
-  name   String
-  email  String  @unique
-  orders Order[]
-}
+// model Customer {
+//   id     String  @id
+//   name   String
+//   email  String  @unique
+//   orders Order[]
+// }
 
 model Product {
   id    String @id
@@ -25,12 +25,11 @@ model Product {
 }
 
 model Order {
-  id         String @id
-  customerId String
-  total      Float
+  id    String @id
+  total Float
 
-  items    OrderItem[]
-  Customer Customer    @relation(fields: [customerId], references: [id])
+  items OrderItem[]
+  // Customer Customer    @relation(fields: [customerId], references: [id])
 }
 
 model OrderItem {

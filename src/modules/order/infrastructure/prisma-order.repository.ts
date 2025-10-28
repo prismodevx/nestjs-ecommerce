@@ -1,5 +1,5 @@
 import { Order } from '@modules/order/domain/order.entity';
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { OrderRepository } from '@modules/order/domain/order.repository';
 import { PrismaService } from '@shared/database/prisma/prisma.service';
 import { randomUUID } from 'crypto';
@@ -12,9 +12,7 @@ export class PrismaOrderRepository
   extends BaseRepository
   implements OrderRepository
 {
-  constructor(
-    private readonly defaultPrisma: PrismaService,
-  ) {
+  constructor(private readonly defaultPrisma: PrismaService) {
     super(defaultPrisma);
   }
 

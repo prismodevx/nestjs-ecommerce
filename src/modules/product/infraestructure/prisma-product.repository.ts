@@ -55,9 +55,19 @@ export class PrismaProductRepository
   }
 
   async save(product: Product): Promise<void> {
-    await this.prisma.product.update({
+    await this.prisma.product.upsert({
       where: { id: product.id },
-      data: { stock: product.getStock() },
+      update: {
+        name: product.name,
+        price: product.price,
+        stock: product.getStock(),
+      },
+      create: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        stock: product.getStock(),
+      },
     });
   }
 

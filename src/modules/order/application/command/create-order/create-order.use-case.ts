@@ -23,9 +23,7 @@ export class CreateOrderUseCase {
       const order = new Order(randomUUID());
 
       const productIds = command.items.map((i) => i.productId);
-
       const products = await this.productRepo.findManyByIdForUpdate(productIds);
-
       const productsMap = new Map(products.map((p) => [p.id, p]));
 
       for (const i of command.items) {
