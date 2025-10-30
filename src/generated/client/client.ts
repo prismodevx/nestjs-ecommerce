@@ -26,8 +26,8 @@ export * from "./enums"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Products
- * const products = await prisma.product.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -41,6 +41,11 @@ export { Prisma }
 path.join(__dirname, "query_engine-windows.dll.node")
 path.join(process.cwd(), "src/generated/client/query_engine-windows.dll.node")
 
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
 /**
  * Model Product
  * 

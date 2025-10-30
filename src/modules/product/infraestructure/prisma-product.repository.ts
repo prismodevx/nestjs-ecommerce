@@ -67,6 +67,7 @@ export class PrismaProductRepository
         name: product.name,
         price: product.price,
         stock: product.getStock(),
+        createdBy: '',
       },
     });
   }

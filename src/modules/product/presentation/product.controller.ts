@@ -3,7 +3,7 @@ import { CreateProductUseCase } from '@modules/product/application/command/creat
 import { ProductBasicResponseDto } from '@modules/product/presentation/dto/product-basic.response.dto';
 import { CreateProductDto } from '@modules/product/presentation/dto/create-product.dto';
 import { CreateProductCommand } from '@modules/product/application/command/create-product/create-product.command';
-import { ProductHttpMapper } from '@modules/product/presentation/product=http.mapper';
+import { ProductHttpMapper } from '@modules/product/presentation/product-http.mapper';
 import { GetProductsUseCase } from '@modules/product/application/query/get-products/get-products.use-case';
 import { ProductListResponseDto } from '@modules/product/presentation/dto/product-list.response.dto';
 import { Product } from '@modules/product/domain/product.entity';

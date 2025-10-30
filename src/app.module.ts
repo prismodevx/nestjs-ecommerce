@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { OrderModule } from '@modules/order/order.module';
 import { ProductModule } from '@modules/product/product.module';
 import { DatabaseModule } from '@shared/database/database.module';
+import { ConfigModule } from '@/config/config.module';
 
 @Module({
   imports: [
     // config
-    ConfigModule.forRoot(),
+    ConfigModule,
 
     // databases and repositories
     DatabaseModule,

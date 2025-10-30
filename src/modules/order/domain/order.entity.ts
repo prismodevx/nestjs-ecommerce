@@ -34,7 +34,7 @@ export class Order {
     return this.total;
   }
 
-  getItems() {
-    return this.items;
+  getItems(): ReadonlyArray<OrderItem> {
+    return [...this.items];
   }
 }

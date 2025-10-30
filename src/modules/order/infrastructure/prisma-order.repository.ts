@@ -29,6 +29,11 @@ export class PrismaOrderRepository
             unitPrice: item.unitPrice,
           })),
         },
+        User: {
+          connect: {
+            id: '',
+          },
+        },
       },
     });
   }
