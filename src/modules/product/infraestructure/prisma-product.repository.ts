@@ -4,7 +4,7 @@ import { PrismaService } from '@shared/database/prisma/prisma.service';
 import { Product } from '@/modules/product/domain/product.entity';
 import { TransactionalRepository } from '@shared/database/prisma/unit-of-work.service';
 import { BaseRepository } from '@shared/database/prisma/base.repository';
-import { Prisma } from '@/generated/client/client';
+import { Prisma } from '@/generated/prisma/client';
 
 @Injectable()
 @TransactionalRepository()

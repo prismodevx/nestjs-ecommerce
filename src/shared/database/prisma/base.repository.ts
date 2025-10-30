@@ -1,4 +1,4 @@
-import { Prisma } from '@/generated/client/client';
+import { Prisma } from '@/generated/prisma/client';
 import { IBaseRepository } from '@shared/database/domain/base.repository.interface';
 import { PrismaService } from '@shared/database/prisma/prisma.service';
 
