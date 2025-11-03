@@ -1,8 +1,8 @@
 import { HashService } from '@shared/hash/domain/hash.service';
 
 export enum Role {
-  CUSTOMER = 'customer',
-  ADMIN = 'admin',
+  CUSTOMER = 'CUSTOMER',
+  ADMIN = 'ADMIN',
 }
 
 export class User {

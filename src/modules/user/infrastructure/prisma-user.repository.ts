@@ -4,7 +4,11 @@ import { UserRepository } from '@modules/user/domain/user.repository';
 import { BaseRepository } from '@shared/database/prisma/base.repository';
 import { PrismaService } from '@shared/database/prisma/prisma.service';
 import { Role, User } from '@modules/user/domain/user.entity';
-import { User as PrismaUser } from '@/generated/prisma/client';
+import {
+  Prisma,
+  User as PrismaUser,
+  UserRole as PrismaUserRole,
+} from '@/generated/prisma/client';
 
 @Injectable()
 @TransactionalRepository()
@@ -32,6 +36,13 @@ export class PrismaUserRepository
     return this.toDomain(user);
   }
 
+  async create(user: User): Promise<void> {
+    const prismaUser = this.toPrisma(user);
+    await this.prisma.user.create({
+      data: prismaUser,
+    });
+  }
+
   private toDomain(raw: PrismaUser): User {
     return new User(
       raw.id,
@@ -40,5 +51,15 @@ export class PrismaUserRepository
       raw.name,
       raw.role as Role,
     );
+  }
+
+  private toPrisma(user: User): Prisma.UserCreateInput {
+    return {
+      id: user.id,
+      email: user.getEmail(),
+      password: user.getPassword(),
+      name: user.getName(),
+      role: user.getRole(),
+    };
   }
 }

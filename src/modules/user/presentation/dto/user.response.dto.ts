@@ -3,4 +3,4 @@ export type UserResponseDto = {
   email: string;
   name: string;
   role: string;
-}
+};

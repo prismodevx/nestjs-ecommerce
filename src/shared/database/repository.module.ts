@@ -4,10 +4,17 @@ import { PrismaOrderRepository } from '@modules/order/infrastructure/prisma-orde
 import { PrismaProductRepository } from '@modules/product/infraestructure/prisma-product.repository';
 import { PrismaProductReadRepository } from '@modules/product/infraestructure/prisma-product-read.repository';
 import { PrismaOrderReadRepository } from '@modules/order/infrastructure/prisma-order-read.repository';
+import { PrismaUserRepository } from '@modules/user/infrastructure/prisma-user.repository';
 
 @Module({
   imports: [PrismaModule],
   providers: [
+    // users
+    {
+      provide: 'UserRepository',
+      useClass: PrismaUserRepository,
+    },
+
     // products
     {
       provide: 'ProductRepository',
@@ -29,6 +36,9 @@ import { PrismaOrderReadRepository } from '@modules/order/infrastructure/prisma-
     },
   ],
   exports: [
+    // users
+    'UserRepository',
+
     // products
     'ProductRepository',
     'ProductReadRepository',

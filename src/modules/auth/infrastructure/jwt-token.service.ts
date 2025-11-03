@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { TokenPayload } from '@modules/auth/domain/token.payload';
 
 @Injectable()
-export class JwtService implements TokenService {
+export class JwtTokenService implements TokenService {
   constructor(
     private readonly nestJwtService: NestJwtService,
     private readonly configService: ConfigService,
