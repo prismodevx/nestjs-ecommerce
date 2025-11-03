@@ -7,6 +7,7 @@ import appConfig from '@/config/app.config';
 import { validationSchema } from '@/config/validation.schema';
 import databaseConfig from '@/config/database.config';
 import jwtConfig from '@/config/jwt.config';
+import { AuthModule } from '@modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +25,9 @@ import jwtConfig from '@/config/jwt.config';
 
     // databases and repositories
     DatabaseModule,
+
+    // shared
+    AuthModule,
 
     // modules
     OrderModule,

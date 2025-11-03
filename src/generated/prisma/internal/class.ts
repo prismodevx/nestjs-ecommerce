@@ -22,7 +22,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Alexis\\ecommerce\\src\\generated\\prisma",
+      "value": "C:\\Users\\USER\\Desktop\\ansonydevx\\nestjs-ecommerce\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -36,7 +36,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Alexis\\ecommerce\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\USER\\Desktop\\ansonydevx\\nestjs-ecommerce\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../../prisma",

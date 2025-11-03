@@ -17,7 +17,11 @@ export class JwtService implements TokenService {
 
   generateRefreshToken(payload: TokenPayload): string {
     return this.nestJwtService.sign(payload, {
-      expiresIn: this.configService.get<string>('jwt.'),
+      expiresIn: this.configService.get<string>('jwt.refreshExpiresIn'),
     });
+  }
+
+  verifyRefreshToken(token: string): TokenPayload {
+    return this.nestJwtService.verify(token);
   }
 }
